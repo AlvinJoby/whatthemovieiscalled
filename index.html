@@ -1,100 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movie Title</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica', sans-serif;
-            background: #111;
-            color: #fff;
-            text-align: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Movie Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header {
-            position: relative;
-            padding: 80px 20px;
-            background: #000;
-            z-index: 10;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top, #141414, #0a0a0a);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
+    header {
+      position: relative;
+      padding: 140px 20px 120px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)),
+                  url('https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      background-attachment: fixed;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+    }
 
-        .description {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin: 20px 0;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 12px #ff1f1f, 0 0 25px #ff1f1f;
+      letter-spacing: 3px;
+      animation: glowPulse 3s infinite alternate;
+    }
 
-        .play-button {
-            padding: 15px 30px;
-            background-color: #ff6f61;
-            border: none;
-            font-size: 1.2rem;
-            color: #fff;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
+    @keyframes glowPulse {
+      from { text-shadow: 2px 2px 12px #ff1f1f, 0 0 25px #ff1f1f; }
+      to { text-shadow: 2px 2px 20px #ff5e5e, 0 0 40px #ff5e5e; }
+    }
 
-        .play-button:hover {
-            background-color: #e24d47;
-        }
+    .description {
+      font-size: 1.3rem;
+      color: #ddd;
+      max-width: 800px;
+      margin: 20px auto 40px;
+      text-shadow: 1px 1px 6px #000;
+    }
 
-        footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 10px 20px;
-            background: #000;
-            color: #aaa;
-        }
+    .play-button {
+      padding: 18px 40px;
+      background: linear-gradient(135deg, #ff4c4c, #ff1f1f);
+      border: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 50, 50, 0.7);
+      transition: all 0.35s ease-in-out;
+    }
 
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
+    .play-button:hover {
+      background: linear-gradient(135deg, #ff1f1f, #ff6a6a);
+      box-shadow: 0 0 40px rgba(255, 76, 76, 1);
+      transform: scale(1.1) rotate(-1deg);
+    }
 
-        /* Smooth fade-in animation */
-        .fade-in {
-            animation: fadeIn 1.5s ease-in-out;
-        }
+    .fade-in { animation: fadeIn 2s ease-out; }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
+    /* Sections */
+    .movie-section {
+      padding: 80px 20px;
+      background: #111;
+    }
+
+    .movie-section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: left;
+      max-width: 1300px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #ff4c4c;
+      text-shadow: 0 0 12px rgba(255,76,76,0.8);
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .movie-card {
+      position: relative;
+      background: #000;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(255, 76, 76, 0.5);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .movie-card:hover img { transform: scale(1.08); }
+
+    /* Overlay for description */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .movie-card:hover .overlay { opacity: 1; }
+
+    .overlay h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      text-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
+
+    .overlay p {
+      font-size: 0.95rem;
+      color: #ddd;
+      line-height: 1.4;
+    }
+
+    footer {
+      background: #0c0c0c;
+      padding: 20px;
+      font-size: 0.95rem;
+      color: #aaa;
+      text-align: center;
+      box-shadow: 0 -2px 15px rgba(0,0,0,0.7);
+      letter-spacing: 1px;
+    }
+  </style>
 </head>
 <body>
 
 <header class="fade-in">
-    <h1>Movie Title</h1>
-    <p class="description">An epic story of adventure and mystery that will keep you on the edge of your seat.</p>
-    <button class="play-button" onclick="window.location.href='movie-link.html'">Watch Now</button>
+  <h1>🎥 Movie Hub</h1>
+  <p class="description">Explore movies by genre. Hover to discover more about each film!</p>
+  <button class="play-button">▶ Browse Now</button>
 </header>
 
 <main>
-    <!-- Additional movie details like trailer, images, or cast info can go here -->
+
+  <!-- ACTION -->
+  <section class="movie-section">
+    <h2>🔥 Action</h2>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg" alt="Avengers: Endgame">
+        <div class="overlay"><h3>Avengers: Endgame</h3><p>The ultimate superhero showdown.</p></div>
+      </div>
+      
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg" alt="The Batman">
+        <div class="overlay"><h3>The Batman</h3><p>A gritty detective story in Gotham’s underworld.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/yo4M2m6z4WpzYv1L8u2kHq5oxz3.jpg" alt="Mad Max: Fury Road">
+        <div class="overlay"><h3>Mad Max: Fury Road</h3><p>High-octane survival in a post-apocalyptic desert.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCI-FI -->
+  <section class="movie-section">
+    <h2>🚀 Sci-Fi</h2>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" alt="Inception">
+        <div class="overlay"><h3>Inception</h3><p>A mind-bending thriller about dreams within dreams.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg" alt="Interstellar">
+        <div class="overlay"><h3>Interstellar</h3><p>A breathtaking journey through space and time.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg" alt="Dune">
+        <div class="overlay"><h3>Dune</h3><p>An epic saga of prophecy and survival on a desert planet.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRAMA -->
+  <section class="movie-section">
+    <h2>🎭 Drama</h2>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg" alt="Joker">
+        <div class="overlay"><h3>Joker</h3><p>A dark story of one man’s descent into madness.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://m.media-amazon.com/images/I/51NiGlapXlL._AC_.jpg" alt="The Godfather">
+        <div class="overlay"><h3>The Godfather</h3><p>A powerful story of family, loyalty, and the mafia.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers: Infinity War">
+        <div class="overlay"><h3>Avengers: Infinity War</h3><p>The heroes unite against Thanos for survival.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMATION -->
+  <section class="movie-section">
+    <h2>🌈 Animation</h2>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/w9kR8qbmQ01HwnvK4alvnQ2ca0L.jpg" alt="Coco">
+        <div class="overlay"><h3>Coco</h3><p>A magical journey into the Land of the Dead.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/2va32apQP97gvUxaMnL5wYt4CRB.jpg" alt="Frozen II">
+        <div class="overlay"><h3>Frozen II</h3><p>Elsa and Anna uncover the secrets of their past.</p></div>
+      </div>
+      <div class="movie-card">
+        <img src="https://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg" alt="Soul">
+        <div class="overlay"><h3>Soul</h3><p>A soulful adventure about life and purpose.</p></div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-    <p>&copy; 2025 Movie Studio. All rights reserved.</p>
+  <p>&copy; 2025 Movie Hub 🎬 All rights reserved.</p>
 </footer>
 
 </body>
